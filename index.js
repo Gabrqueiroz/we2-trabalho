@@ -15,12 +15,19 @@ const db = knex({
   
 })
 
+app.set('view engine', 'html')
+exports.index = function(req, res){
+  res.render('index');
+};
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded( {extended: false}))
+
 app.get('/', function (req, res, next) {
   res.sendFile(__dirname + "/dist/index.html")
   });
 
 app.get('/all',(req, res)=>{
-  res.sendFile(__dirname + "/dist/index.html")
   db('task')
  .then (dados =>{
    res.send(dados)
@@ -28,6 +35,14 @@ app.get('/all',(req, res)=>{
  })
   })
 
+app.post('/save',(req, res)=>{
+db('task')
+.insert(req.body)
+.then (dados => {
+  return res.send(dados)
+})
+  
+})
 
 app.listen(8081,() => {
     console.log(' Servidor Ok ');
