@@ -16,6 +16,8 @@ const db = knex({
 })
 
 
+
+
 app.get('/', function (req, res, next) {
   res.sendFile(__dirname + "/dist/index.html")
   });
