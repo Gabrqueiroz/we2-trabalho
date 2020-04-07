@@ -1,79 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="PT-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trabalho Gabriel Queiroz</title>
-   <!-- Última versão CSS compilada e minificada -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-   <!-- Tema opcional -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Última versão JavaScript compilada e minificada -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-   REFENCIAR bootstrap
-
-  <!-- fontawesome-->
+<!-- Última versão JQUERY compilada e minificada -->
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<!-- Última versão CSS compilada e minificada -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Última versão JS compilada e minificada -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  
+<!-- fontawesome-->
    <script src="https://kit.fontawesome.com/15d3963f90.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <h1> Registro</h1>
-    <div class="row p-3 m-0">
-        <div class="col ">
-            <!-- Button trigger modal -->
-    <button class="btn btn-primary" type="button"  data-toggle="modal" data-target="#ModalFormulario"> Novo Usuario </button>
+    <form id="FormUsuario">
+        <div class="form-row col-md-6 p-3">
+          <div class="form-group ">
+            <label for="inputEmail4">Nome</label>
+            <input type="name" class="form-control" id="nome" placeholder="Gabriel">
+          </div>
+          <div class="form-group ">
+            <label for="inputPassword4">Descrição</label>
+            <input type="text" class="form-control" id="descricao" placeholder="Estudante">
+          </div>
         </div>
-    </div>
-        <div class="row p-3 m-0">
-            <div class="col"></div>
-            <table class="table table-striped table-hover " id="tabelaCadastro">
-                <tr>
-                   <thead>
-                    <th>id</th>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Endereco</th>
-                    <th>Data Incio</th>
-                    <th>Data Final</th>
-                    <th></th> <!-- Coluna com botoes-->
-                <tr>  
-                </thead>
-                   <tbody>
-                    <tr>
-                        <td id="id">01</td>
-                        <td >Gabriel</td>
-                        <td>Estudante</td>
-                        <td>Rua 132</td>
-                        <td>06/06/2020</td>
-                        <td>14/06/2020</td>
-                        <td class="btn td_editar text-info" ><i class="far fa-edit"></i></td> <!-- Update-->
-                        <td class="btn td_excluir text-danger"> <i class="fas fa-trash-alt"></i> </td> <!-- Delete-->
-                    </tr>
-                   </tbody>
-                
-            </table>
+        <div class="form-group col-md-6 p-3">
+          <label for="inputAddress">Edereço</label>
+          <input type="text" class="form-control" id="endereco" placeholder="Rua albuquerque, 520">
         </div>
+            <div class="form-row col-md-6 p-3">
+          <div class="form-group">
+            <label for="inputCity">Data Incio</label>
+            <input type="date" class="form-control" id="dataincio" placeholder="01/01/2020">
+          </div>
+         <br>
+          <div class="form-row ">
+            <div class="form-group ">
+              <label for="inputCity">Data Final</label>
+              <input type="date" class="form-control" id="datafinal" placeholder="31/12/2020">
+            </div>
+          </div>
+        
+          
+        </div>
+        <button type="submit" class="btn btn-primary" id="salvar">Confirmar</button>
+        </div>
+        
 
-        <!-- Modal Formulario -->
-<div class="modal fade" id="#ModalFormulario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="#ModalFormulario">Novo Registro</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            Formulario será aqui 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary">Salvar</button>
-        </div>
+        <!-- Resposta-->
+        <div class="col-md-6 p-3">
+          <table class="table table-striped table-hover " id="resposta">
+              <tr>
+                 <thead>
+                  <th id="id"></th>
+                  <th id = "name">Nome</th>
+                  <th id="descricao">Descrição</th>
+                  <th id ="endereco"> Endereco</th>
+                  <th id="datainio">Data Incio</th>
+                  <th id="datafinal">Data Final</th>
+                  <th></th> <!-- Coluna com botoes-->
+              <tr>  
+              </thead>
+                 <tbody>
+                  <tr>
+                      <td>01</td>
+                      <td >Gabriel</td>
+                      <td>Estudante</td>
+                      <td>Rua 132</td>
+                      <td>06/06/2020</td>
+                      <td>14/06/2020</td>
+                      <td class="btn td_editar text-info" ><i class="far fa-edit"></i></td> <!-- Update-->
+                      <td class="btn td_excluir text-danger"> <i class="fas fa-trash-alt"></i> </td> <!-- Delete-->
+                  </tr>
+                 </tbody>
+              
+          </table>
       </div>
-    </div>
-  </div>
+
+
+
+      </form>
     </body>
 </html>
+
