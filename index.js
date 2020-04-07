@@ -15,12 +15,19 @@ const db = knex({
   
 })
 
-
-
-
 app.get('/', function (req, res, next) {
   res.sendFile(__dirname + "/dist/index.html")
   });
+
+app.get('/all',(req, res)=>{
+  res.sendFile(__dirname + "/dist/index.html")
+  db('task')
+ .then (dados =>{
+   res.send(dados)
+   
+ })
+  })
+
 
 app.listen(8081,() => {
     console.log(' Servidor Ok ');
