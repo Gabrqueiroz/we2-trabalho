@@ -4,6 +4,10 @@ const app = express();//Inicia a lib
 const bodyParser= require('body-parser')
 const knex = require('knex')
 const path = require('path')
+const restify = require('restify');
+const errs = require('restify-errors');
+
+
 
 const db = knex({
   client: 'mysql',
@@ -15,6 +19,27 @@ const db = knex({
   
 })
 
+const server = restify.createServer({
+  name: 'myapp',
+  version: '1.0.0'
+});
+
+server.get('/', restify.plugins.serveStatic({
+  directory: './dist',
+  file: 'index.html'
+
+}));
+
+server.get('/read', function (req, res, next) {
+
+  db('rest').then((dados)=>{
+    res.send(dados)
+  },next)
+
+  return next();
+});
+
+///////////
 app.set('view engine', 'html')
 exports.index = function(req, res){
   res.render('index');
@@ -49,18 +74,99 @@ app.listen(8081,() => {
   });
   
 /*
-  //var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'dbuser',
-  password : 's3kreee7'
+const restify = require('restify');
+const errs = require('restify-errors');
+
+
+const server = restify.createServer({
+  name: 'myapp',
+  version: '1.0.0'
 });
 
-connection.connect();
+server.use(restify.plugins.acceptParser(server.acceptable));
+server.use(restify.plugins.queryParser());
+server.use(restify.plugins.bodyParser());
 
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-  if (err) throw err;
-  console.log('The solution is: ', rows[0].solution);
+
+
+server.listen(8080, function () {
+  console.log('%s listening at %s', server.name, server.url);
 });
 
-connection.end();*/
+var knex = require('knex')({
+  client: 'mysql',
+  connection: {
+    host : '127.0.0.1',
+    user : 'root',
+    password : '',
+    database : 'db'
+    }
+});
+
+server.get('/', restify.plugins.serveStatic({
+  directory: './dist',
+  file: 'index.html'
+
+}));
+/////////////////////////////
+server.get('/read', function (req, res, next) {
+
+  knex('rest').then((dados)=>{
+    res.send(dados)
+  },next)
+
+  return next();
+});
+
+server.post('/create', function (req, res, next) {
+
+  knex('rest')
+    .insert(req.body)
+    .then((dados)=>{
+    res.send(dados)
+  },next)
+
+  return next();
+});
+
+server.get('/show/:id', function (req, res, next) {
+  const{id} = req.params
+
+  knex('rest')
+    .where('id', id)
+    .first()
+    .then((dados)=>{
+      if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
+    res.send(dados)
+  }, next)
+  return next();
+});
+
+server.put('/update/:id', function (req, res, next) {
+const{id} = req.params
+
+  knex('rest')
+    .update(req.body)
+    .where('id',id)
+    .then((dados)=>{
+      if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
+    res.send("atualizado com sucesso")
+  },next)
+
+  return next();
+});
+
+server.del('/delete/:id', function (req, res, next) {
+  const{id} = req.params
+  
+    knex('rest')
+      .delete()
+      .where('id',id)
+      .then((dados)=>{
+        if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
+      res.send("deletado com sucesso")
+    },next)
+  
+    return next();
+  });
+*/
