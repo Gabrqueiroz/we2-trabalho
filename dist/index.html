@@ -61,7 +61,7 @@
                   <th id = "name">Nome</th>
                   <th id="descricao">Descrição</th>
                   <th id ="endereco"> Endereco</th>
-                  <th id="datainio">Data Incio</th>
+                  <th id="datainicio">Data Incio</th>
                   <th id="datafinal">Data Final</th>
                   <th></th> <!-- Coluna com botoes-->
               <tr>  
@@ -74,8 +74,8 @@
                       <td> </td>
                       <td> </td>
                       <td> </td>
-                      <td class="btn td_editar text-info" ><i class="far fa-edit"></i></td> <!-- Update-->
-                      <td class="btn td_excluir text-danger"> <i class="fas fa-trash-alt"></i> </td> <!-- Delete-->
+                      <td class="btn td_editar text-info" id="update"><i class="far fa-edit"></i></td> <!-- Update-->
+                      <td class="btn td_excluir text-danger" id="dele"> <i class="fas fa-trash-alt"></i> </td> <!-- Delete-->
                   </tr>
                  </tbody>
               
@@ -87,134 +87,23 @@
       </form>
     </body>
     
-    
     <script>
-            
-            botao.addEventListener('click', create)
-            lista.addEventListener('click', edit)
-            lista.addEventListener('click', del)
-        window.onload = () => {
+      window.onload = () =>{
+        const lista = document.querySelector('#FormUsuario')
+        const botao = document.querySelector('#salvar')
+        const endereco = document.querySelector('#endereco') //////////
+        const nome = document.querySelector('#nome')
+        const desc = document.querySelector('#descricao')
+        const datai = document.querySelector('#datainicio')
+        const dataf = document.querySelector('#datafinal')
+        botao.addEventListener('click', create)
+        botao.addEventListener('click', update)
 
-            const botao = document.querySelector('#botao')
-            const texto = document.querySelector('#texto')
-            const lista = document.querySelector('#lista')
+        lista.addEventListener('click', del)
 
-            botao.addEventListener('click', create)
-
-            lista.addEventListener('click', del)
-            
-            read()
-        }
-        function read() {
-            lista.innerHTML = ""
- //chamada ajax na rota /read
- axios.get('/read')
- .then((response) =>{
- // console.log(response);
- response.data.forEach(element => {
- lista.innerHTML += templateLi(element.id, element.name)
- })
- })
- .catch((error) =>{
- console.log(error);
- })
-
-        }
-        function create() {
-
-            const name = texto.value
-            axios.post('/create', { name })
-                .then((response) => {
-                    console.log(response)
-                    lista.innerHTML += templateLi(response.data[0], name)
-
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
-
-        }
-        
-        function edit() {
-            if (element.target.classList.contains('update')) {
-                const input = document.createElement('input')
-
-                input.type = 'text'
-
-                input.setAttribute('value', '')
-                input.addEventListener('keydown', update.bind(pai, id, input))
-
-                const pai = element.target.parentElement;
-                const id = element.target.dataset.id
-
-                pai.innerHTML=""
-                pai.appendChild(input)
-                input.addEventListener('keydown', update)
-                input.focus()
-            }
-        }
-        function update() {
-            const x = event.key
-            if (x == null || x != 'Enter') return
-
-            axios.put(`/update/${id}`, { name: input.value })
-                .then((response) => {
-                    if (response.status = 200) {
-                        this.innerHTML = templateLi(id, input.value, false)
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
-        }
-        function del(element) {
-            console.log(element)
-            if (element.target.classList.contains('delete')) {
-                //id do elemento a excluir?
-                const id = element.target.dataset.id
-                axios.delete(`/delete/${id}`)
-                    .then((response) => {
-                        console.log(response)
-                        if (response.status = 200) {
-                            lista.removeChild(element.path[1])
-                        }
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    })
-            }
-
-        }
-        function templateLi(id, name, element = true) {
-            return `
-        ${element ? `<li class="list-group-item">` : ''}
-        ${name}
-        <i class="btn btn-danger delete fa fa-trash"
-        style="float:right; margin-left: 5px;"
-        data-id="${id}"
-        ></i>
-        <i class="btn btn-primary update fa fa-wrench"
-        style="float:right;"
-        data-id="${id}"
-        ></i>
-        ${element ? `</li>` : ''}
-        `
-
-        }
-        function update () {
-            update(`/update/${id}`, {inputvalue})
-                    .then((response) => {
-                        console.log(response)
-                        if (response.status = 200) {
-                            lista.removeChild(element.path[1])
-                        }
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    })
-        }
-    
+}
     </script>
+    
 
 
 </html>
