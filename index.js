@@ -140,6 +140,21 @@ app.get('/all',(req, res)=>{
    
  })
   })
+
+
+  HTML RESPOSTA 
+  <tbody>
+  <tr id="retorno">
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td class="btn td_editar text-info" id="updat"><i class="far fa-edit"></i></td> 
+      <td class="btn td_excluir text-danger" id="dele"> <i class="fas fa-trash-alt"></i> </td> 
+  </tr>
+ </tbody>
 */
  
 
